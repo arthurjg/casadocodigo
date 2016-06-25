@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:body>
+	<h:messages/>
+	<h:form prependId="false">
+		<div>
+			<h:outputLabel>Titulo</h:outputLabel>
+			<h:inputText id="titulo" value="#{adminBooksBean.product.title}"/>
+			<h:message for="titulo"/>
+		</div>
+		<div>
+			<h:outputLabel>Descrição</h:outputLabel>
+			<h:inputTextarea id="descricao" cols="20" rows="10" value="#{adminBooksBean.product.description}"/>
+			<h:message for="descricao"/>
+		</div>
+		<div>
+			<h:outputLabel>Numero de Páginas</h:outputLabel>
+			<h:inputText id="paginas" value="#{adminBooksBean.product.numberOfPages}">
+				<f:validateLongRange minimum="80" />			
+			</h:inputText>
+			<h:message for="paginas"/>
+		</div>
+		<div>
+			<h:outputLabel>Preço</h:outputLabel>
+			<h:inputText id="preco" value="#{adminBooksBean.product.price}">
+				<f:validateDoubleRange minimum="10" maximum="100" />			
+			</h:inputText>
+			<h:message for="preco"/>
+		</div>
+		<div>
+			<h:outputLabel>Data de Lançamento</h:outputLabel>
+			<h:inputText id="release" pt:type="date" value="#{adminBooksBean.product.releaseDate}">							
+			</h:inputText>
+			<h:message for="data de lançamento"/>
+		</div>
+		<div>
+			<h:outputLabel>Autores</h:outputLabel>
+			<h:selectManyListbox id="autores" value="#{adminBooksBean.product.authors}"
+				converter="entityConverter">
+				<f:selectItems value="#{adminBooksBean.authors}"
+					var="author" itemLabel="#{author.name}" itemValue="#{author}"/>
+			</h:selectManyListbox>
+			<h:message for="autores"/>
+		</div>
+		<h:commandButton value="Gravar" action="#{adminBooksBean.save}" />
+	</h:form>
+</h:body>
+</html>

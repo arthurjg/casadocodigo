@@ -12,6 +12,7 @@ import br.com.casadocodigo.loja.daos.AuthorDAO;
 import br.com.casadocodigo.loja.daos.BookDAO;
 import br.com.casadocodigo.loja.models.Author;
 import br.com.casadocodigo.loja.models.Book;
+import br.com.casadocodigo.loja.web.util.MensagemUtil;
 
 @Model
 public class AdminBooksBean {	
@@ -22,26 +23,38 @@ public class AdminBooksBean {
 	@Inject
 	private AuthorDAO authorDAO;
 	
+	@Inject
+	private MensagemUtil mensagemUtil;
+	
 	private Book product = new Book();	
+	private List<Book> books;
 	private List<Author> authors;
 	private List<Integer> selectedAuthorsIds = new ArrayList<Integer>();
 	
 	@PostConstruct
 	public void loadObjects(){
-		this.authors = authorDAO.list();
+		this.authors = authorDAO.list();		
 	}
 	
 	@Transactional
-	public void save(){
-		populateBookAuthor();
+	public String save(){		
 		bookDAO.save(product);
+		this.clearObjects();
+		mensagemUtil.adicionaMensagem("Livro gravado com sucesso.");
+		return "/livros/lista?faces-redirect=true";
 	}
 	
 	private void populateBookAuthor(){
-		/*selectedAuthorsIds.stream().map(
+		selectedAuthorsIds.stream().map(
 				(id) -> {
 					return new Author(id);
-				}).forEach(product add;*/
+				}).forEach(product :: add);
+	}
+	
+	public void clearObjects(){
+		product = new Book();	
+		this.selectedAuthorsIds.clear();
+		this.books = null;
 	}
 
 	public Book getProduct() {
@@ -66,6 +79,17 @@ public class AdminBooksBean {
 
 	public void setAuthors(List<Author> authors) {
 		this.authors = authors;
+	}
+
+	public List<Book> getBooks() {
+		if(books == null){
+			books = this.bookDAO.list();
+		}
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
 	}
 
 }
