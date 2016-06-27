@@ -4,21 +4,27 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	<h:body>	
 		<h:messages />
-		<h:dataTable value="#{adminListBooksBean.books}" var="book">
-			<h:column>
-				<f:facet name="header">Titulo</f:facet>
+	<h:dataTable value="#{adminListBooksBean.books}" var="book">
+		<h:column>
+			<f:facet name="header">Titulo</f:facet>
 				#{book.title}
 			</h:column>
-			<h:column>
-				<f:facet name="header">Número de páginas</f:facet>
+		<h:column>
+			<f:facet name="header">Número de páginas</f:facet>
 				#{book.numberOfPages}
 			</h:column>
-			<h:column>
-				<f:facet name="header">Autores</f:facet>
-				<ui:repeat var="author" value="#{book.authors}">
+		<h:column>
+			<f:facet name="header">Autores</f:facet>
+			<ui:repeat var="author" value="#{book.authors}">
 					#{author.name}|					
 				</ui:repeat>
-			</h:column>			
-		</h:dataTable>
-	</h:body>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Sumário</f:facet>
+			<h:outputLink value="#{request.contextPath}/#{book.summaryPath}">
+				#{book.summaryPath}
+			</h:outputLink>
+		</h:column>
+	</h:dataTable>
+</h:body>
 </html>

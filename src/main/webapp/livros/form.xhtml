@@ -6,7 +6,7 @@
 
 <h:body>
 	<h:messages/>
-	<h:form prependId="false">
+	<h:form prependId="false" enctype="multipart/form-data">
 		<div>
 			<h:outputLabel>Titulo</h:outputLabel>
 			<h:inputText id="titulo" value="#{adminBooksBean.product.title}"/>
@@ -45,6 +45,10 @@
 					var="author" itemLabel="#{author.name}" itemValue="#{author}"/>
 			</h:selectManyListbox>
 			<h:message for="autores"/>
+		</div>
+		<div>
+			<h:outputLabel>Capa do Livro</h:outputLabel>
+			<h:inputFile id="summary" label="Sumario do Livro" value="#{adminBooksBean.summary}"/>					
 		</div>
 		<h:commandButton value="Gravar" action="#{adminBooksBean.save}" />
 	</h:form>

@@ -6,10 +6,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
 import javax.transaction.Transactional;
 
 import br.com.casadocodigo.loja.daos.AuthorDAO;
 import br.com.casadocodigo.loja.daos.BookDAO;
+import br.com.casadocodigo.loja.infra.FileSaver;
 import br.com.casadocodigo.loja.models.Author;
 import br.com.casadocodigo.loja.models.Book;
 import br.com.casadocodigo.loja.web.util.MensagemUtil;
@@ -26,7 +28,11 @@ public class AdminBooksBean {
 	@Inject
 	private MensagemUtil mensagemUtil;
 	
+	@Inject
+	private FileSaver fileSaver;
+	
 	private Book product = new Book();	
+	private Part summary;	
 	private List<Book> books;
 	private List<Author> authors;
 	private List<Integer> selectedAuthorsIds = new ArrayList<Integer>();
@@ -37,21 +43,16 @@ public class AdminBooksBean {
 	}
 	
 	@Transactional
-	public String save(){		
+	public String save(){	
+		String fileName = fileSaver.write("sumarios", summary);
+		product.setSummaryPath(fileName);
 		bookDAO.save(product);
-		this.clearObjects();
+		this.clearObjects();		
 		mensagemUtil.adicionaMensagem("Livro gravado com sucesso.");
 		return "/livros/lista?faces-redirect=true";
-	}
+	}		
 	
-	private void populateBookAuthor(){
-		selectedAuthorsIds.stream().map(
-				(id) -> {
-					return new Author(id);
-				}).forEach(product :: add);
-	}
-	
-	public void clearObjects(){
+	private void clearObjects(){
 		product = new Book();	
 		this.selectedAuthorsIds.clear();
 		this.books = null;
@@ -90,6 +91,14 @@ public class AdminBooksBean {
 
 	public void setBooks(List<Book> books) {
 		this.books = books;
+	}
+
+	public Part getSummary() {
+		return summary;
+	}
+
+	public void setSummary(Part summary) {
+		this.summary = summary;
 	}
 
 }
