@@ -6,6 +6,14 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.ClientConfiguration;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.S3ClientOptions;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+
 public class FileSaver {
 	
 	@Inject
@@ -26,6 +34,19 @@ public class FileSaver {
 			throw new RuntimeException(e);
 		}
 		return baseFolder + "/" + fileName;
+	}
+	
+	public String writeOnExternal(String baseFolder, Part multipartFile) {
+		AmazonS3Client s3Client = getClientConfig();		
+		
+		String fileName = extractFilename(multipartFile.getHeader(CONTENT_DISPOSITION));		
+		try {
+			s3Client.putObject("casadocodigo", fileName, 
+					multipartFile.getInputStream(), new ObjectMetadata());
+			return "https://s3.amazonaws.com/casadocodigo/" + fileName + "?noAuth=true";
+		} catch (AmazonClientException | IOException e){
+			throw new RuntimeException(e);
+		}		
 	}
 
 	private String extractFilename(String contentDisposition) {
@@ -49,6 +70,15 @@ public class FileSaver {
 			}
 		}
 		return filename;
+	}
+	
+	private AmazonS3Client getClientConfig() {
+		AWSCredentials credentials = 
+				new BasicAWSCredentials("AKIAIOSFODNN7EXAMPLE","wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY");
+		AmazonS3Client newClient = new AmazonS3Client(credentials, new ClientConfiguration());
+		newClient.setS3ClientOptions(new S3ClientOptions().withPathStyleAccess(true));
+		newClient.setEndpoint("http://localhost:9444/s3");
+		return newClient;
 	}
 
 }

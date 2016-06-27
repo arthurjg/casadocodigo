@@ -42,8 +42,8 @@ public class Book {
 	@DecimalMin("20")
 	private BigDecimal price;	
 	
-	@NotNull
 	@Future	
+	@NotNull
 	private Calendar releaseDate;
 	
 	@ManyToMany
