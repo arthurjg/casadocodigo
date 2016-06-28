@@ -19,6 +19,9 @@ public class FileSaver {
 	@Inject
 	private HttpServletRequest request;
 	
+	@Inject
+	private AmazonS3Client s3Client;
+	
 	private static final String CONTENT_DISPOSITION = "content-disposition";
 
 	private static final String FILENAME_KEY = "filename=";
@@ -36,8 +39,7 @@ public class FileSaver {
 		return baseFolder + "/" + fileName;
 	}
 	
-	public String writeOnExternal(String baseFolder, Part multipartFile) {
-		AmazonS3Client s3Client = getClientConfig();		
+	public String writeOnExternal(String baseFolder, Part multipartFile) {			
 		
 		String fileName = extractFilename(multipartFile.getHeader(CONTENT_DISPOSITION));		
 		try {
@@ -70,15 +72,6 @@ public class FileSaver {
 			}
 		}
 		return filename;
-	}
-	
-	private AmazonS3Client getClientConfig() {
-		AWSCredentials credentials = 
-				new BasicAWSCredentials("AKIAIOSFODNN7EXAMPLE","wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY");
-		AmazonS3Client newClient = new AmazonS3Client(credentials, new ClientConfiguration());
-		newClient.setS3ClientOptions(new S3ClientOptions().withPathStyleAccess(true));
-		newClient.setEndpoint("http://localhost:9444/s3");
-		return newClient;
-	}
+	}	
 
 }

@@ -1,10 +1,13 @@
-<html xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	<h:body>	
-		<h:messages />
-	<h:dataTable value="#{adminListBooksBean.books}" var="book">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>	
+		
+	<h:messages />
+	<h:dataTable border="1" cellpadding="2" cellspacing="0"
+		value="#{adminBooksBean.books}" var="book">
 		<h:column>
 			<f:facet name="header">Titulo</f:facet>
 				#{book.title}

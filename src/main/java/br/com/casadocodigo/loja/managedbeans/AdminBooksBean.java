@@ -44,7 +44,7 @@ public class AdminBooksBean {
 	
 	@Transactional
 	public String save(){	
-		String fileName = fileSaver.write("sumarios", summary);
+		String fileName = fileSaver.writeOnExternal("sumarios", summary);
 		product.setSummaryPath(fileName);
 		bookDAO.save(product);
 		this.clearObjects();		
