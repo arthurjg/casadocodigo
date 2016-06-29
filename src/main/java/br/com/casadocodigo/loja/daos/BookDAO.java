@@ -21,6 +21,17 @@ public class BookDAO {
 				"select distinct(b) from Book b join fetch b.authors",Book.class)
 		.getResultList();
 	}
+	
+	public List<Book> lastReleases() {
+		return manager.createQuery(
+			"select b from Book b where b.releaseDate <= now() order by	b.id desc", Book.class)
+		.setMaxResults(3).getResultList();
+	}
+
+	public List<Book> olderBooks() {
+		return manager.createQuery("select b from Book b", Book.class)
+				.setMaxResults(20).getResultList();
+	}
 
 	
 

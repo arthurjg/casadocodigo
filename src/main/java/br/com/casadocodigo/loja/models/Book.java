@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -52,6 +51,7 @@ public class Book {
 	private List<Author> authors = new ArrayList<Author>();
 	
 	private String summaryPath;
+	private String coverPath;
 	
 	public void add(Author author){
 		this.authors.add(author);
@@ -115,6 +115,14 @@ public class Book {
 
 	public void setSummaryPath(String summaryPath) {
 		this.summaryPath = summaryPath;
+	}
+
+	public String getCoverPath() {
+		return coverPath;
+	}
+
+	public void setCoverPath(String coverPath) {
+		this.coverPath = coverPath;
 	}
 	
 	
