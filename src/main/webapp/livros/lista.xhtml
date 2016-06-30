@@ -6,6 +6,7 @@
 <h:body>	
 		
 	<h:messages />
+	<h:form id="list">
 	<h:dataTable border="1" cellpadding="2" cellspacing="0"
 		value="#{adminBooksBean.books}" var="book">
 		<h:column>
@@ -23,11 +24,32 @@
 				</ui:repeat>
 		</h:column>
 		<h:column>
+			<f:facet name="header">Capa</f:facet>
+			<h:outputLink value="#{request.contextPath}/#{book.coverPath}">
+				#{book.coverPath}
+			</h:outputLink>
+		</h:column>
+		<h:column>
 			<f:facet name="header">Sumário</f:facet>
 			<h:outputLink value="#{request.contextPath}/#{book.summaryPath}">
 				#{book.summaryPath}
 			</h:outputLink>
 		</h:column>
+		<h:column>
+			<f:facet name="header">Editar</f:facet>
+			<h:commandLink action="/livros/form">
+				<h:graphicImage library="imagens" name="editar16.png" style="border:0" />
+				<f:setPropertyActionListener target="#{adminBooksBean.product}" value="#{book}" />
+			</h:commandLink>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Excluir</f:facet>
+			<h:commandLink action="#{adminBooksBean.remove}">
+				<h:graphicImage library="imagens" name="excluir16.png" style="border:0" />
+				<f:setPropertyActionListener target="#{adminBooksBean.product}" value="#{book}" />
+			</h:commandLink>
+		</h:column>
 	</h:dataTable>
+	</h:form>
 </h:body>
 </html>

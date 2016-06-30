@@ -33,6 +33,7 @@ public class AdminBooksBean {
 	
 	private Book product = new Book();	
 	private Part summary;	
+	private Part cover;	
 	private List<Book> books;
 	private List<Author> authors;
 	private List<Integer> selectedAuthorsIds = new ArrayList<Integer>();
@@ -44,13 +45,28 @@ public class AdminBooksBean {
 	
 	@Transactional
 	public String save(){	
-		String fileName = fileSaver.writeOnExternal("sumarios", summary);
-		product.setSummaryPath(fileName);
-		bookDAO.save(product);
+		if(summary != null){
+			String summaryFileName = fileSaver.writeOnExternal("sumarios", summary);
+			product.setSummaryPath(summaryFileName);
+		}
+		if(cover != null){
+			String coverFileName = fileSaver.writeOnExternal("capas", cover);
+			product.setCoverPath(coverFileName);
+		}		
+		if(product.getId() == null || product.getId() == 0){
+			bookDAO.save(product);
+		} else {
+			bookDAO.update(product);
+		}		
 		this.clearObjects();		
 		mensagemUtil.adicionaMensagem("Livro gravado com sucesso.");
 		return "/livros/lista?faces-redirect=true";
-	}		
+	}	
+	
+	@Transactional
+	public void remove(){	
+		bookDAO.remove(product);
+	}
 	
 	private void clearObjects(){
 		product = new Book();	
@@ -99,6 +115,14 @@ public class AdminBooksBean {
 
 	public void setSummary(Part summary) {
 		this.summary = summary;
+	}
+
+	public Part getCover() {
+		return cover;
+	}
+
+	public void setCover(Part cover) {
+		this.cover = cover;
 	}
 
 }

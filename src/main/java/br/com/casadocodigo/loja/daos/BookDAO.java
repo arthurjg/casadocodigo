@@ -16,6 +16,17 @@ public class BookDAO {
 		manager.persist(product);
 	}
 	
+	public void update(Book product) {
+		manager.merge(product);
+	}
+	
+	public void remove(Book product) {
+		Book productAttached = manager.find(Book.class, product.getId());
+		if(productAttached != null){
+			manager.remove(product);
+		}		
+	}
+	
 	public List<Book> list() {
 		return manager.createQuery(
 				"select distinct(b) from Book b join fetch b.authors",Book.class)

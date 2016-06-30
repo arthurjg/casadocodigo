@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.infra;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -43,12 +44,12 @@ public class FileSaver {
 		
 		String fileName = extractFilename(multipartFile.getHeader(CONTENT_DISPOSITION));		
 		try {
-			s3Client.putObject("casadocodigo", fileName, 
+			s3Client.putObject("casadocodigo/" + baseFolder, fileName,
 					multipartFile.getInputStream(), new ObjectMetadata());
-			return "https://s3.amazonaws.com/casadocodigo/" + fileName + "?noAuth=true";
-		} catch (AmazonClientException | IOException e){
+			return "http://localhost:9444/s3/casadocodigo/" + baseFolder + "_" + fileName + "?noAuth=true";
+		} catch (AmazonClientException | IOException e) {
 			throw new RuntimeException(e);
-		}		
+		}	
 	}
 
 	private String extractFilename(String contentDisposition) {

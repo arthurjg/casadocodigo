@@ -48,6 +48,10 @@
 		</div>
 		<div>
 			<h:outputLabel>Capa do Livro</h:outputLabel>
+			<h:inputFile id="cover" label="Capa do Livro" value="#{adminBooksBean.cover}"/>					
+		</div>
+		<div>
+			<h:outputLabel>Sumario do Livro</h:outputLabel>
 			<h:inputFile id="summary" label="Sumario do Livro" value="#{adminBooksBean.summary}"/>					
 		</div>
 		<h:commandButton value="Gravar" action="#{adminBooksBean.save}" />
