@@ -21,10 +21,14 @@ public class BookDAO {
 	}
 	
 	public void remove(Book product) {
-		Book productAttached = manager.find(Book.class, product.getId());
+		Book productAttached = manager.find(Book.class, product.getId());		
 		if(productAttached != null){
 			manager.remove(product);
 		}		
+	}
+	
+	public Book findById(Integer id) {
+		return manager.find(Book.class, id);
 	}
 	
 	public List<Book> list() {

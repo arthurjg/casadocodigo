@@ -7,6 +7,7 @@
 <h:body>
 	<h:messages/>
 	<h:form prependId="false" enctype="multipart/form-data">
+		<h:inputHidden id="id" value="#{adminBooksBean.product.id}" />
 		<div>
 			<h:outputLabel>Titulo</h:outputLabel>
 			<h:inputText id="titulo" value="#{adminBooksBean.product.title}"/>

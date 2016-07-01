@@ -65,7 +65,9 @@ public class AdminBooksBean {
 	
 	@Transactional
 	public void remove(){	
-		bookDAO.remove(product);
+		bookDAO.remove(product);			
+		mensagemUtil.adicionaMensagem("Livro " + product.getTitle() + " removido com sucesso.");
+		this.clearObjects();	
 	}
 	
 	private void clearObjects(){
