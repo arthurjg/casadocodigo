@@ -1,0 +1,174 @@
+<html xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:pt="http://java.sun.com/jsf/passthrough"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:jsf="http://java.sun.com/jsf">
+
+	<f:metadata>
+		<f:viewParam id="id" name="id" value="#{productDetailBean.id}" />
+		<f:viewAction action="#{productDetailBean.loadBook()}" />
+	</f:metadata>
+
+<ui:composition template="/site/_template.xhtml">
+	<ui:define name="body">
+		<nav class="categories-nav">
+			<ul class="container">
+				<li class="category"><a href="http://www.casadocodigo.com.br">Home</a></li>
+
+
+				<li class="category"><a href="/collections/livros-de-agile">
+						Agile </a></li>
+
+
+
+				<li class="category"><a href="/collections/livros-de-front-end">
+						Front End </a></li>
+
+
+
+
+
+
+
+				<li class="category"><a href="/collections/livros-de-games">
+						Games </a></li>
+
+
+
+				<li class="category"><a href="/collections/livros-de-java">
+						Java </a></li>
+
+
+
+				<li class="category"><a href="/collections/livros-de-mobile">
+						Mobile </a></li>
+
+
+
+				<li class="category"><a
+					href="/collections/livros-desenvolvimento-web"> Web </a></li>
+
+
+
+				<li class="category"><a href="/collections/outros"> Outros
+				</a></li>
+
+
+			</ul>
+		</nav>
+		<article id="livro-css-eficiente">
+			<header id="product-highlight" class="clearfix">
+				<div id="product-overview" class="container">
+					<img width="280px" height="395px"
+						src="#{productDetailBean.book.coverPath}"
+						class="product-featured-image"
+						alt="CSS Eficiente: Técnicas e ferramentas que fazem a diferença nos seus estilos" />
+					<h1 class="product-title">#{productDetailBean.book.title}</h1>
+					<p class="product-author">
+						<span class="product-author-link"> <ui:repeat var="author"
+								value="#{productDetailBean.book.authors}">
+            	#{author.name}|
+            </ui:repeat>
+
+						</span>
+					</p>
+
+					<p class="book-description">#{productDetailBean.book.description}</p>
+				</div>
+			</header>
+
+
+			<section class="buy-options clearfix">
+				<form jsf:id="form" method="post" class="container">
+					<ul id="variants" class="clearfix">
+						<li class="buy-option"><input type="radio" name="id"
+							class="variant-radio"
+							id="product-variant-#{productDetailBean.book.id}"
+							value="#{productDetailBean.book.id}" checked="checked" /> <label
+							class="variant-label"
+							for="product-variant-#{productDetailBean.book.id}">
+								E-book + Impresso </label> <small class="compare-at-price">R$
+								#{productDetailBean.book.price}</small>
+							<p class="variant-price">R$ #{productDetailBean.book.price}</p></li>
+					</ul>
+
+					<button type="submit"
+						jsf:action="#{shoppingCartBean.add(productDetailBean.book.id)}"
+						class="submit-image icon-basket-alt"
+						title="#{productDetailBean.book.title}"></button>
+
+				</form>
+
+			</section>
+
+			<div class="container">
+
+				<h2 class="summary-call section-title">Leia este livro e...</h2>
+				<section class="summary">
+					<ul>
+
+						<!-- aqui poderia ter um real cadastro do sumário -->
+						<li><h3>Seçao 1</h3></li>
+						<li><h3>Seçao 2</h3></li>
+						<li><h3>Seçao 3</h3></li>
+						<li><h3>Seçao 4</h3></li>
+						<li><h3>Seçao 5</h3></li>
+						<li><h3>Seçao 6</h3></li>
+						<li><h3>Seçao 7</h3></li>
+						<li><h3>
+								E muito mais... <a href='#{productDetailBean.book.summaryPath}'>veja
+									o sumário</a>.
+							</h3></li>
+					</ul>
+				</section>
+
+				<section class="author product-detail">
+					<h2 class="section-title">
+
+						<ui:repeat var="author" value="#{productDetailBean.book.authors}">
+            #{author.name}|
+         </ui:repeat>
+
+					</h2>
+					<span>
+
+						<p class="book-description">
+							<img class="author-image" src="" alt=""
+								style="float: left; margin-right: 10px;" /><a>Descricao
+								sobre os autores</a>.
+						</p>
+
+					</span>
+				</section>
+
+				<section class="data product-detail">
+					<h2 class="section-title">Dados do livro:</h2>
+					<p>
+						Número de páginas: <span>#{productDetailBean.book.numberOfPages}</span>
+					</p>
+
+
+					<p></p>
+					<p>
+						Data de publicação:
+						<h:outputText value="#{productDetailBean.book.releaseDate.time}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p>
+
+					<p>
+						Encontrou um erro? <a href='/submissao-errata' target='_blank'>Submeta
+							uma errata</a>
+					</p>
+				</section>
+			</div>
+
+
+		</article>
+
+
+	</ui:define>
+</ui:composition>
+
+</html>	

@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,7 +46,7 @@ public class Book {
 	@NotNull
 	private Calendar releaseDate;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@Size(min = 1)
 	@NotNull
 	private List<Author> authors = new ArrayList<Author>();
