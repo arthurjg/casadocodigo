@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"	
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+<!--<![endif]-->
+
+<head>
+	<ui:include src="head.xhtml"/>
+
+	<ui:insert name="extraCss"/>	
+
+</head>
+
+<body class="#{bodyClass}">
+
+	<ui:include src="header.xhtml"/>
+
+	<ui:insert name="body"/>
+
+	<ui:include src="footer.xhtml"/>
+	
+</body>
+</html>

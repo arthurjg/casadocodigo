@@ -191,8 +191,7 @@ h3,h1{
 }
 
 #twitter {
-  display: block;
-  background: url('//cdn.shopify.com/s/files/1/0155/7645/t/177/assets/sprites.png?17557711475382243135') no-repeat -8px -242px;
+  display: block;  
   width: 31px;
   height: 31px;
   text-indent: -9999px;
@@ -201,8 +200,7 @@ h3,h1{
 }
 
 #facebook {
-  display:block;
-  background: url('//cdn.shopify.com/s/files/1/0155/7645/t/177/assets/sprites.png?17557711475382243135') no-repeat -42px -242px;
+  display:block;  
   width: 31px;
   height: 31px;
   text-indent: -9999px;

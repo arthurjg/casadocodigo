@@ -1,6 +1,5 @@
 package br.com.casadocodigo.loja.managedbeans.site;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 

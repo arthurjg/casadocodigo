@@ -11,7 +11,7 @@
 		
 		<section class="container middle">
 		  <h2 id="cart-title">Seu carrinho de compras</h2>		  
-		  
+		  <form jsf:id="cartForm" jsf:prependId="false" method="post">
 		    <table id="cart-table">
 		      <colgroup>
 		        <col class="item-col"/>
@@ -30,8 +30,7 @@
 		          <th width="5%"></th>
 		        </tr>
 		      </thead>
-		      <tbody>
-		      <form jsf:id="cartForm" jsf:prependId="false" method="post">
+		      <tbody>		      
 			      <ui:repeat var="item" value="#{shoppingCart.list}">
 				        <tr>
 				          <td class="cart-img-col"><img src="#{item.book.coverPath}" width="71px" height="100px"/></td><td class="item-title">#{item.book.title}</td>
@@ -41,21 +40,21 @@
 				          
 				          <td class="remove-item"><a jsf:action="#{shoppingCartBean.remove(item.bookId)}"><img src="//cdn.shopify.com/s/files/1/0155/7645/t/177/assets/excluir.png?11981592617154272979" alt="Excluir" title="Excluir" /></a></td>
 				        </tr>
-			      </ui:repeat>
-		       </form>
+			      </ui:repeat>		       
 		      </tbody>
 			      <tfoot>
 			        <tr>
-			          <td colspan="3"><a href="${request.contextPath}/site/checkout.xhtml" id="checkout" class="checkout">Finalizar compra </a></td>
+			          <td colspan="3">
+			          	<a href="${request.contextPath}/site/checkout.xhtml" id="checkout" class="checkout">
+			          		Finalizar compra 
+			          	</a>
+			          </td>
 			          <td class="quantity-input-cell"><input type="submit" class="update-cart" disabled="disabled" name="update" value=""/></td>
 			          <td class="numeric-cell">R$ #{shoppingCart.total}</td><td></td>
 			        </tr>
 			      </tfoot>
 		    </table>
-		    
-		  
-		  
-		 
+		  </form>	 
 		  
 		  <h2>Você já conhece os outros livros da Casa do Código?</h2>
 		  <ul id="collection" class="related-books">          
