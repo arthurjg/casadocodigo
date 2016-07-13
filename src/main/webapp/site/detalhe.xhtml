@@ -1,29 +1,18 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:pt="http://java.sun.com/jsf/passthrough"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:jsf="http://java.sun.com/jsf">
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 	<f:metadata>
 		<f:viewParam id="id" name="id" value="#{productDetailBean.id}" />
 		<f:viewAction action="#{productDetailBean.loadBook()}" />
 	</f:metadata>
 
-<ui:composition template="/site/_template.xhtml">
+<ui:composition template="/templates/site/_template.xhtml">
 	<ui:define name="body">
-		<nav class="categories-nav">
-			<ul class="container">
-				<li class="category"><a href="http://www.casadocodigo.com.br">Home</a></li>
-				<li class="category"><a href="/collections/livros-de-agile">Agile </a></li>
-				<li class="category"><a href="/collections/livros-de-front-end">Front End </a></li>
-				<li class="category"><a href="/collections/livros-de-games">Games </a></li>
-				<li class="category"><a href="/collections/livros-de-java">Java </a></li>
-				<li class="category"><a href="/collections/livros-de-mobile">Mobile </a></li>
-				<li class="category"><a	href="/collections/livros-desenvolvimento-web"> Web </a></li>
-				<li class="category"><a href="/collections/outros"> Outros</a></li>
-			</ul>
-		</nav>
+			
 		<article id="livro-css-eficiente">
 			<header id="product-highlight" class="clearfix">
 				<div id="product-overview" class="container">
@@ -46,21 +35,23 @@
 			<section class="buy-options clearfix">
 				<form jsf:id="form" method="post" class="container">
 					<ul id="variants" class="clearfix">
-						<li class="buy-option"><input type="radio" name="id"
-							class="variant-radio"
-							id="product-variant-#{productDetailBean.book.id}"
-							value="#{productDetailBean.book.id}" checked="checked" /> <label
-							class="variant-label"
-							for="product-variant-#{productDetailBean.book.id}">
-								E-book + Impresso </label> <small class="compare-at-price">R$
-								#{productDetailBean.book.price}</small>
-							<p class="variant-price">R$ #{productDetailBean.book.price}</p></li>
+						<li class="buy-option">
+							<input type="radio" name="id" class="variant-radio"
+								id="product-variant-#{productDetailBean.book.id}"
+								value="#{productDetailBean.book.id}" checked="checked" /> 
+							<label class="variant-label" for="product-variant-#{productDetailBean.book.id}">
+								E-book + Impresso 
+							</label> 
+							<small class="compare-at-price">R$ #{productDetailBean.book.price}</small>
+							<p class="variant-price">R$ #{productDetailBean.book.price}</p>
+						</li>
 					</ul>
 
 					<button type="submit"
 						jsf:action="#{shoppingCartBean.add(productDetailBean.book.id)}"
 						class="submit-image icon-basket-alt"
 						title="#{productDetailBean.book.title}"></button>
+					<!-- <h:commandButton value="Gravar" action="#{shoppingCartBean.add(productDetailBean.book.id)}" /> -->
 
 				</form>
 

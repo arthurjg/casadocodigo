@@ -1,12 +1,14 @@
 package br.com.casadocodigo.loja.managedbeans.site;
 
-import javax.enterprise.inject.Model;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import br.com.casadocodigo.loja.daos.BookDAO;
 import br.com.casadocodigo.loja.models.Book;
 
-@Model
+@ManagedBean
+@ViewScoped
 public class ProductDetailBean {
 	
 	@Inject
@@ -15,10 +17,10 @@ public class ProductDetailBean {
 	private Integer id;	
 	
 	public void loadBook(){
-		this.book = bookDAO.findById(id);
+		this.book = bookDAO.findById(id);		
 	}
 	
-	public Book getBook() {
+	public Book getBook() {		
 		return book;
 	}
 	public void setBook(Book book) {
@@ -31,9 +33,6 @@ public class ProductDetailBean {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	
-	
-	
+	}	
 
 }

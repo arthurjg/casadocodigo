@@ -16,7 +16,7 @@ public class ShoppingCartBean {
 	@Inject
 	private BookDAO bookDAO;
 	
-	public String add(Integer id){
+	public String add(Integer id){			
 		Book book = bookDAO.findById(id);
 		ShoppingItem item = new ShoppingItem(book);
 		shoppingCart.add(item);

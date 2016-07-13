@@ -592,7 +592,10 @@ h3,h1{
 }
 
 .update-cart {
-  background: url('//cdn.shopify.com/s/files/1/0155/7645/t/177/assets/refresh.png?17557711475382243135') no-repeat;
+  background: url(//cdn.shopify.com/s/files/1/0155/7645/t/223/assets/refresh.png?1460366401063469144) no-repeat;
+  background-position: 50%;
+  background-color: transparent;
+  background-size: 75%;
   height: 24px;
   width: 24px;
   border: 0px;
@@ -629,25 +632,25 @@ h3,h1{
 }
 
 #sprite-atualizacoes {
-  background: url('//cdn.shopify.com/s/files/1/0155/7645/t/177/assets/sprites.png?17557711475382243135')no-repeat -7px -5px;
+  background: url('#{request.contextPath}/resources/imagens/c-d-c-logo.svg')no-repeat -7px -5px;
   width: 48px;
   height: 44px;
 }
 
 #sprite-drm {
-  background: url('//cdn.shopify.com/s/files/1/0155/7645/t/177/assets/sprites.png?17557711475382243135') no-repeat -7px -57px;
+  background: url('#{request.contextPath}/resources/imagens/c-d-c-logo.svg') no-repeat -7px -57px;
   width: 48px;
   height: 48px;
 }
 
 #sprite-renome {
-  background: url('//cdn.shopify.com/s/files/1/0155/7645/t/177/assets/sprites.png?17557711475382243135') no-repeat -7px -117px;
+  background: url('#{request.contextPath}/resources/imagens/c-d-c-logo.svg') no-repeat -7px -117px;
   width: 79px;
   height: 57px;
 }
 
 #sprite-caelum {
-  background: url('//cdn.shopify.com/s/files/1/0155/7645/t/177/assets/sprites.png?17557711475382243135')no-repeat -7px -186px;
+  background: url('#{request.contextPath}/resources/imagens/c-d-c-logo.svg')no-repeat -7px -186px;
   width: 70px;
   height: 53px;
 }

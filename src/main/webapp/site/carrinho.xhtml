@@ -1,11 +1,12 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:pt="http://java.sun.com/jsf/passthrough"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:jsf="http://java.sun.com/jsf">
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:o="http://omnifaces.org/ui">
 
-<ui:composition template="/site/_template.xhtml">
+<ui:composition template="/templates/site/_template.xhtml">
 	<ui:param name="bodyClass" value="cart"/>
 	<ui:define name="body">
 		
@@ -33,12 +34,22 @@
 		      <tbody>		      
 			      <ui:repeat var="item" value="#{shoppingCart.list}">
 				        <tr>
-				          <td class="cart-img-col"><img src="#{item.book.coverPath}" width="71px" height="100px"/></td><td class="item-title">#{item.book.title}</td>
+				          <td class="cart-img-col">
+				          	<img src="#{item.book.coverPath}" width="71px" height="100px"/>
+				          </td>
+				          <td class="item-title">#{item.book.title}</td>
 				          <td class="numeric-cell">R$ #{item.price}</td>
-				          <td class="quantity-input-cell"><input type="number" min="0" readonly="readonly" id="updates_4082273665" name="updates[4082273665]" value="#{shoppingCart.getQuantity(item)}"/></td>
+				          <td class="quantity-input-cell">
+				          	<input type="number" min="0" readonly="readonly" id="updates_4082273665" 
+				          		name="updates[4082273665]" value="#{shoppingCart.getQuantity(item)}"/>
+				          </td>
 				          <td class="numeric-cell">R$ #{shoppingCart.getTotal(item)}</td>
 				          
-				          <td class="remove-item"><a jsf:action="#{shoppingCartBean.remove(item.bookId)}"><img src="//cdn.shopify.com/s/files/1/0155/7645/t/177/assets/excluir.png?11981592617154272979" alt="Excluir" title="Excluir" /></a></td>
+				          <td class="remove-item">
+				          	<a jsf:action="#{shoppingCartBean.remove(item.bookId)}">
+				          		Excluir (IMG)
+				          	</a>
+				          </td>
 				        </tr>
 			      </ui:repeat>		       
 		      </tbody>
@@ -49,8 +60,11 @@
 			          		Finalizar compra 
 			          	</a>
 			          </td>
-			          <td class="quantity-input-cell"><input type="submit" class="update-cart" disabled="disabled" name="update" value=""/></td>
-			          <td class="numeric-cell">R$ #{shoppingCart.total}</td><td></td>
+			          <td class="quantity-input-cell">
+			          	<input type="submit" class="update-cart" disabled="disabled" name="update" value=""/>
+			          </td>
+			          <td class="numeric-cell">R$ #{shoppingCart.total}</td>
+			          <td></td>
 			        </tr>
 			      </tfoot>
 		    </table>
