@@ -10,7 +10,7 @@
 		
 	<h:messages />
 	<h:form id="list">
-	<h:dataTable border="1" cellpadding="2" cellspacing="0"	value="#{adminBooksBean.books}" var="book">
+	<h:dataTable styleClass="table table-bordered" value="#{adminBooksBean.books}" var="book">
 		<h:column>
 			<f:facet name="header">Titulo</f:facet>
 				#{book.title}

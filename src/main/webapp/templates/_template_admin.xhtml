@@ -19,6 +19,8 @@
 	
 	<!-- BootStrap -->
 	<link href="#{request.contextPath}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+	
+	<link href="#{request.contextPath}/resources/css/admin-styles.css" rel="stylesheet" type="text/css" media="all" />
 
 	<ui:insert name="extraCss"/>	
 
@@ -26,14 +28,29 @@
 
 <body class="#{bodyClass}">
 
-	<!-- <ui:include src="header.xhtml"/> -->
-	<h1>Painel Administrativo - Lista de Livros</h1>
+	<!-- Wrap all page content here -->
+    <div id="wrap">
 
-	<ui:insert name="body"/>
+		<ui:include src="menu_admin.xhtml"/>
+		
+		<div class="container">
+        	<div class="page-header">
+          		<!-- <ui:include src="header.xhtml"/> -->
+				<h1>Painel Administrativo - Lista de Livros</h1>
+        	</div>
+        	
+        	<ui:insert name="body"/>
+        
+      	</div>
+      </div>
 
-	<!-- <ui:include src="footer.xhtml"/> -->
-	<hr></hr>
-	<h3>@CasaDoCodigo</h3>
+		<!-- <ui:include src="footer.xhtml"/> -->
+		<div id="footer">
+      		<div class="container">
+      			<hr></hr>
+        		<p class="text-muted credit"> <a href="http://martinbean.co.uk">@CasaDoCodigo</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+      		</div>
+    	</div>	
 	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

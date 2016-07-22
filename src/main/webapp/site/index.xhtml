@@ -2,7 +2,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:pt="http://java.sun.com/jsf/passthrough"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui">
 	
 <ui:composition template="/templates/site/_template.xhtml">
 	<ui:define name="extraCss">
@@ -11,33 +12,39 @@
 	<ui:define name="body">		
 
 		<section id="index-section" class="container middle">
-			<ul id="home-highlight-collection">
-				<ui:repeat var="book" value="#{homeBean.lastReleases()}">
-					<li class="col-left"><a
-						href="#{request.contextPath}/site/detalhe.xhtml?id=#{book.id}"
-						class="block clearfix"> <img width="170" height="240"
-							src="#{book.coverPath}" alt="#{book.title}" title="#{book.title}" />
-							<h2 class="product-title">#{book.title}</h2> <small
-							class="buy-button">Lan&#231;amento!</small>
-					</a></li>
-				</ui:repeat>
-			</ul>
+			<o:cache>
+				<ul id="home-highlight-collection">
+					<ui:repeat var="book" value="#{homeBean.lastReleases()}">
+						<li class="col-left">
+							<a href="#{request.contextPath}/site/detalhe.xhtml?id=#{book.id}" class="block clearfix"> 
+							<img width="170" height="240" src="#{book.coverPath}" alt="#{book.title}"
+								 title="#{book.title}" />
+							<h2 class="product-title">#{book.title}</h2> 
+							<small class="buy-button">Lan&#231;amento!</small>
+							</a>
+						</li>
+					</ui:repeat>
+				</ul>
+			</o:cache>
 
 			<h1 class="cdc-call">Últimos dias com os preços promocionais.
 				Aproveite!</h1>
-
-			<ul class="clearfix book-collection">
-
-				<ui:repeat var="book" value="#{homeBean.olderBooks()}">
-					<li><a
-						href="#{request.contextPath}/site/detalhe.xhtml?id=#{book.id}"
-						class="block clearfix">
-							<h2 class="product-title">#{book.title}</h2> <img width="143"
-							height="202" src="#{book.coverPath}" alt="#{book.title}"
-							title="#{book.title}" /> <small class="buy-button">Compre</small>
-					</a></li>
-				</ui:repeat>
-			</ul>
+			
+			<o:cache>
+				<ul class="clearfix book-collection">
+					<ui:repeat var="book" value="#{homeBean.olderBooks()}">
+						<li>
+							<a href="#{request.contextPath}/site/detalhe.xhtml?id=#{book.id}"
+								class="block clearfix">
+								<h2 class="product-title">#{book.title}</h2> 
+								<img width="143" height="202" src="#{book.coverPath}" alt="#{book.title}"
+									title="#{book.title}" />
+								<small class="buy-button">Compre</small>
+							</a>
+						</li>
+					</ui:repeat>
+				</ul>
+			</o:cache>
 
 			<h2 class="cdc-call">Diferenciais da Casa do Código</h2>
 

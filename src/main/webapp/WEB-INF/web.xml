@@ -13,6 +13,11 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 	
+	<context-param>
+		<param-name>resteasy.media.type.mappings</param-name>
+		<param-value>json : application/json, xml : application/xml</param-value>
+	</context-param>
+	
 	<welcome-file-list>
 		<welcome-file>site/index.xhtml</welcome-file>		
 	</welcome-file-list>

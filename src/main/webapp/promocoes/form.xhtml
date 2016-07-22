@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/_template_admin.xhtml">
+
+	<ui:define name="body">	
+	<h:messages/>
+	<h:form prependId="false">		
+		<div>
+			<h:outputLabel>Titulo</h:outputLabel>
+			<h:inputText id="titulo" value="#{adminSalesBean.sale.title}"/>
+			<h:message for="titulo"/>
+		</div>
+		<div>
+			<h:outputLabel>Livro</h:outputLabel>
+			<h:selectOneMenu id="livro" value="#{adminSalesBean.saleBookId}">
+				<f:selectItems value="#{adminBooksBean.books}" var="book" 
+					itemLabel="#{book.title}" itemValue="#{book.id}"/>
+			</h:selectOneMenu>
+			<h:message for="livro"/>
+		</div>		
+		<h:commandButton value="Gravar" action="#{adminSalesBean.save}" />
+	</h:form>
+</ui:define>
+</ui:composition>
+</html>

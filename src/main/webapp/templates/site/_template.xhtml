@@ -21,13 +21,14 @@
 
 	<ui:include src="footer.xhtml"/>
 	
-	<script>
-		var salesChannel = new WebSocket("ws://localhost:8080/#{request.contextPath}/channel/sales");
-		salesChannel.onmessage = function (message) {
+	<script>		
+		var salesChannel = new WebSocket("ws://localhost:8080/casadocodigo/channel/sales");
+		console.log(salesChannel);
+		salesChannel.onmessage = function (message) {			
 			var newSale = JSON.parse(message.data);
 			if(confirm("Quer participar da seguinte promocao: "	+ newSale.title +"?")){
 				document.location.href = "#{request.contextPath}/site/detalhe.xhtml?id=" + newSale.bookId;
-			}
+			}			
 		};
 	</script>
 	

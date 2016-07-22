@@ -6,6 +6,9 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.TypedQuery;
+
+import org.hibernate.jpa.QueryHints;
 
 import br.com.casadocodigo.loja.models.Book;
 
@@ -41,14 +44,18 @@ public class BookDAO {
 	}
 	
 	public List<Book> lastReleases() {
-		return manager.createQuery(
-			"select b from Book b where b.releaseDate <= now() order by	b.id desc", Book.class)
-		.setMaxResults(3).getResultList();
+		 TypedQuery<Book> query = manager.createQuery(
+			"select b from Book b where b.releaseDate <= now() order by	b.id desc", Book.class);
+		 
+		 query.setHint(QueryHints.HINT_CACHEABLE, true);
+		 return query.setMaxResults(3).getResultList();
 	}
 
 	public List<Book> olderBooks() {
-		return manager.createQuery("select b from Book b", Book.class)
-				.setMaxResults(20).getResultList();
+		TypedQuery<Book> query = manager.createQuery("select b from Book b", Book.class);
+				
+		query.setHint(QueryHints.HINT_CACHEABLE, true);
+		 return query.setMaxResults(20).getResultList();
 	}
 
 	
