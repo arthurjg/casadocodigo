@@ -49,11 +49,16 @@ public class CheckoutBean {
 	
 	@Transactional
 	public void checkout() throws IOException {
+		if(systemUserDAO.otherUserHasSocialId(systemUser.getSocialId(), systemUser.getEmail())){
+			mensagemUtil.adicionaMensagem("O CPF digitado já foi informado por outro usuario. É esse mesmo?");
+			return;
+		}
+		
 		if(!systemUserDAO.hasEmail(systemUser.getEmail())){
 			systemUserDAO.save(systemUser);
 		} else {
 			systemUser = systemUserDAO.getByEmail(systemUser.getEmail());
-		}
+		}		
 		
 		Checkout checkout = new Checkout(systemUser, cart);
 		checkoutDAO.save(checkout);

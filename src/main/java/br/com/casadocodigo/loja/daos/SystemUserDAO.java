@@ -15,9 +15,13 @@ public class SystemUserDAO {
 		entityManager.persist(systemUser);
 	}
 	
-	public boolean hasEmail(String email) {		
-		return getByEmailQuery(email).getMaxResults() > 0;
-	}	
+	public boolean hasEmail(String email) {				
+		return getByEmailQuery(email).getResultList().size() > 0;
+	}
+	
+	public boolean otherUserHasSocialId(String socialId, String email) {				
+		return getBySocialIdQuery(socialId, email).getResultList().size() > 0;
+	}
 	
 	public SystemUser getByEmail(String email) {		
 		return (SystemUser) getByEmailQuery(email).getSingleResult();
@@ -28,6 +32,14 @@ public class SystemUserDAO {
 		Query consulta = entityManager.createQuery(hql);
 		consulta.setParameter("email", email );
 		return consulta;
-	}
+	}	
+	
+	private Query getBySocialIdQuery(String socialId, String email){
+		String hql = "select u from SystemUser u where u.socialId = :socialId and u.email != :email";
+		Query consulta = entityManager.createQuery(hql);
+		consulta.setParameter("socialId", socialId );
+		consulta.setParameter("email", email );
+		return consulta;
+	}	
 
 }
